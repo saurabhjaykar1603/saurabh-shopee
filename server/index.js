@@ -1,8 +1,7 @@
-import express from "express";
+import express, { response } from "express";
 import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import User from "./models/User.js";
-import e from "express";
 dotenv.config();
 
 const app = express();
@@ -14,7 +13,7 @@ const connectDB = async () => {
     console.log("MongoDB Connected");
   }
 };
-
+// post/signup
 app.post("/signup", async (req, res) => {
   const { name, email, password, mobile, address, gender } = req.body;
   const user = new User({
@@ -36,6 +35,66 @@ app.post("/signup", async (req, res) => {
     res.json({
       success: false,
       message: err.message,
+    });
+  }
+});
+
+// post/login
+// app.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     return res.json({
+//       success: false,
+//       message: "Please enter your email and password ",
+//     });
+//   }
+// });
+
+// const user = await User.findOne({
+//   email: email,
+//   password: password,
+// }).select("name", "email", "mobile")
+
+// if (user) {
+//   return res.json({
+//     success: true,
+//     data: user,
+//     message: "Your account has been logged in successfully",
+//   });
+// } else {
+//   res.json({
+//     success: false,
+//     message: "invalid creadential",
+//   });
+// }
+
+// /Post/login
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.json({
+      success: false,
+      message: "Please provide a valid email and password",
+    });
+  }
+
+  const user = await User.findOne({ email: email, password: password }).select(
+    "name email password"
+  );
+
+  if (user) {
+    return res.json({
+      success: true,
+      data: user,
+      message: "Login successful",
+    });
+  } else {
+    return res.json({
+      success: false,
+
+      message: "invalid details",
     });
   }
 });
