@@ -158,6 +158,18 @@ app.put("/product/:id", async (req, res) => {
   });
 });
 
+//GET/products/search?q=....
+
+app.get("/products/search", async (req, res) => {
+  const { q } = req.query;
+  const product = await Product.findOne({ name: { $regex: q, $options: "i" } });
+  res.json({
+    success: true,
+    data: product,
+    message: "product searched successfully",
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
