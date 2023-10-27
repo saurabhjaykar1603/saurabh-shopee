@@ -110,6 +110,17 @@ app.post("/product", async (req, res) => {
   }
 });
 
+//get/get/product/id
+app.get("/product/:id", async (req, res) => {
+  const { id } = req.params;
+  const finProduct = await Product.findById({ _id: id });
+  res.json({
+    success: true,
+    data: finProduct,
+    message: "Product find successfully",
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
