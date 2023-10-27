@@ -81,6 +81,35 @@ app.get("/products", async (req, res) => {
   });
 });
 
+//post//post/product
+app.post("/product", async (req, res) => {
+  const { name, price, description, image, brand, category } = req.body;
+
+  const product = new Product({
+    name: name,
+    price: price,
+    description: description,
+    image: image,
+    brand: brand,
+    category: category,
+  });
+
+  try {
+    const savedProduct = await product.save();
+
+    res.json({
+      success: true,
+      data: savedProduct,
+      message: "product saved successfully",
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
