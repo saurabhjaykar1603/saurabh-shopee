@@ -131,6 +131,33 @@ app.delete("/product/:id", async (req, res) => {
   });
 });
 
+//put//product/:id
+app.put("/product/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, price, description, image, brand, category } = req.body;
+  await Product.updateOne(
+    { _id: id },
+    {
+      $set: {
+        name: name,
+        price: price,
+        description: description,
+        image: image,
+        brand: brand,
+        category: category,
+      },
+    }
+  );
+
+  const updateProduct = await Product.findOne({ _id: id });
+
+  res.json({
+    success: true,
+    data: updateProduct,
+    message: "Product updated successfully",
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
