@@ -228,6 +228,18 @@ app.get("/orders/user/:id", async (req, res) => {
   });
 });
 
+// patch /order/status/:id
+app.patch("/order/status/:id", async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  await Order.updateOne({ _id: id }, { $set: { status: status } });
+  res.json({
+    success: true,
+    message: "Order Status updated successfully",
+  });
+});
+
 //GET /orders
 app.get("/orders", async (req, res) => {
   const findOrders = await Order.find().populate("user product");
