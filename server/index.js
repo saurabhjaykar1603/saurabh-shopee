@@ -171,26 +171,36 @@ app.get("/products/search", async (req, res) => {
   });
 });
 // //POST - /order
-app.post("/order", async (req,res)=>{
-  const {user, product, quantity, price, deliveryCharges, shippingAddress} = req.body;
- 
- const order  = new Order({
-  
-   user,
-   product,
-   quantity,
-   price,
-   deliveryCharges,
-   shippingAddress
- });
- 
-   const saveUserOrder = await order.save();
-   res.json({
-     success : true,
-     data: saveUserOrder,
-     message : "Order save Successfuly."
-   })
- })
+app.post("/order", async (req, res) => {
+  const { user, product, quantity, price, deliveryCharges, shippingAddress } =
+    req.body;
+
+  const order = new Order({
+    user,
+    product,
+    quantity,
+    price,
+    deliveryCharges,
+    shippingAddress,
+  });
+
+  try {
+    const saveUserOrder = await order.save();
+    res.json({
+      success: true,
+      data: saveUserOrder,
+      message: "Order save Successfuly.",
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+//GET /orders/:id
+
 const PORT = process.env.PORT || 6000 || 9000;
 
 app.listen(PORT, () => {
