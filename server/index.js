@@ -213,6 +213,21 @@ app.get("/orders/:id", async (req, res) => {
   });
 });
 
+// GET /order/user:id
+app.get("/orders/user/:id", async (req, res) => {
+  const { id } = req.params;
+  const findUser = await Order.find({ user: id }).populate("user product");
+
+  findUser.forEach((order) => {
+    order.user.password = undefined;
+  });
+  res.json({
+    success: true,
+    data: findUser,
+    message: "Order successfully found by user product",
+  });
+});
+
 //GET /orders
 app.get("/orders", async (req, res) => {
   const findOrders = await Order.find().populate("user product");
