@@ -10,6 +10,8 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+const PORT = process.env.PORT || 9000;
+
 const connectDB = async () => {
   const conn = await mongoose.connect(process.env.MONGODB_URI);
   if (conn) {
@@ -202,17 +204,28 @@ app.post("/order", async (req, res) => {
 //GET /orders/:id
 app.get("/orders/:id", async (req, res) => {
   const { id } = req.params;
-  const findOrder = await Order.findById(id).populate("user product")
-   findOrder.user.password = undefined;
+  const findOrder = await Order.findById(id).populate("user product");
+  findOrder.user.password = undefined;
   res.json({
     success: true,
     data: findOrder,
     message: "Order successfully found",
-  })
-  
+  });
 });
 
-const PORT = process.env.PORT || 6000 || 9000;
+//GET /orders
+app.get("/orders", async (req, res) => {
+  const findOrders = await Order.find().populate("user product");
+
+  findOrders.forEach((order) => {
+    order.user.password = undefined;
+  });
+  res.json({
+    success: true,
+    data: findOrders,
+    message: "Order successfully found by user product",
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server Running on PORT : ${PORT}`);
