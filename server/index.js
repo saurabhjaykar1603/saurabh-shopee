@@ -3,6 +3,7 @@ import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import User from "./models/User.js";
 import Product from "./models/Product.js";
+import Order from "./models/Order.js";
 
 dotenv.config();
 
@@ -170,7 +171,7 @@ app.get("/products/search", async (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000 || 9000;
 
 app.listen(PORT, () => {
   console.log(`Server Running on PORT : ${PORT}`);
