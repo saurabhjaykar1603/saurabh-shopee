@@ -200,6 +200,17 @@ app.post("/order", async (req, res) => {
 });
 
 //GET /orders/:id
+app.get("/orders/:id", async (req, res) => {
+  const { id } = req.params;
+  const findOrder = await Order.findById(id).populate("user product")
+   findOrder.user.password = undefined;
+  res.json({
+    success: true,
+    data: findOrder,
+    message: "Order successfully found",
+  })
+  
+});
 
 const PORT = process.env.PORT || 6000 || 9000;
 
