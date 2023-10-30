@@ -34,12 +34,12 @@ function Signup() {
       return;
     }
     const response = await axios.post("/signup", {
-      name: name,
-      email: email,
-      mobile: mobile,
-      password: password,
-      address: address,
-      gender: gender,
+      name,
+      email,
+      password,
+      mobile,
+      address,
+      gender,
     });
     console.log(response.data);
     if (response.data.success) {
