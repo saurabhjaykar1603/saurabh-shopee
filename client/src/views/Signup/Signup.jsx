@@ -10,7 +10,31 @@ function Signup() {
   const [address, setAddress] = useState("");
   const [gender, setGender] = useState("female");
 
- 
+  // api rq
+  const signupUser = async () => {
+    if (!name) {
+      showToast("name is required", "alert");
+      return;
+    }
+
+    if (!email) {
+      showToast("email is required", "alert");
+      return;
+    }
+    if (!password) {
+      showToast("password is required", "alert");
+      return;
+    }
+    if (!mobile) {
+      showToast("mobile is required", "alert");
+      return;
+    }
+    if (!address) {
+      showToast("adress is required", "alert");
+      return;
+    }
+    
+  };
 
   return (
     <>
