@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SignupImg from "./images/signup.png";
 import showToast from "crunchy-toast";
+import axios from "axios";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -11,30 +12,49 @@ function Signup() {
   const [gender, setGender] = useState("female");
 
   // api rq
-  const signupUser = async () => {
+  async function signupUser() {
     if (!name) {
-      showToast("name is required", "alert");
+      showToast("name is required", "alert", 4000);
       return;
     }
-
     if (!email) {
-      showToast("email is required", "alert");
+      showToast("email is required", "alert", 4000);
       return;
     }
     if (!password) {
-      showToast("password is required", "alert");
+      showToast("password is required", "alert", 4000);
       return;
     }
     if (!mobile) {
-      showToast("mobile is required", "alert");
+      showToast("mobile number is required", "alert", 4000);
       return;
     }
     if (!address) {
-      showToast("adress is required", "alert");
+      showToast("address is required", "alert", 4000);
       return;
     }
-    
-  };
+    const response = await axios.post("/signup", {
+      name: name,
+      email: email,
+      mobile: mobile,
+      password: password,
+      address: address,
+      gender: gender,
+    });
+    console.log(response.data);
+    if (response.data.success) {
+      showToast(response.data.message, "success", 3000);
+      window.location.href = "/login";
+    } else {
+      showToast(response.data.message, "alert", 3000);
+
+      setName("");
+      setEmail("");
+      setMobile("");
+      setPassword("");
+      setAddress("");
+    }
+  }
 
   return (
     <>
