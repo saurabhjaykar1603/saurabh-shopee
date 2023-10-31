@@ -57,7 +57,7 @@ function Navbar() {
                   className="pointer login-links fw-bold fs-5 ms-2 cursor-pointer"
                   onClick={() => {
                     localStorage.removeItem("user");
-                    window.location.href = "/";
+                    window.location.href = "/login";
                   }}
                 >
                   Log out
