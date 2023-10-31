@@ -22,25 +22,25 @@ function Navbar() {
 
             <div>
               <Link
-                className="me-4 fs-5 fw-medium text-dark text-deco-none login-links"
+                className="me-4 fs-5 fw-bold text-dark text-deco-none login-links"
                 to="/"
               >
                 Home
               </Link>
               <Link
-                className="me-4 fs-5 fw-medium text-dark text-deco-none login-links"
+                className="me-4 fs-5 fw-bold text-dark text-deco-none login-links"
                 to="/signup"
               >
                 Sign up
               </Link>
               <Link
-                className="me-4 fs-5 fw-medium text-dark text-deco-none login-links"
+                className="me-4 fs-5 fw-bold text-dark text-deco-none login-links"
                 to="/login"
               >
                 Login
               </Link>
               <Link
-                className="fs-5 fw-medium text-dark text-deco-none login-links"
+                className="fs-5 fw-medium fw-bold text-dark text-deco-none login-links"
                 to="/my-order"
               >
                 My Orders
@@ -48,7 +48,21 @@ function Navbar() {
             </div>
 
             <div>
-              <h5 className="pointer login-links"> Hello {user?.name || "Guest "}! </h5>
+              <span className="pointer login-links fw-bold fs-5 cursor-pointer">
+                {" "}
+                Hello {user?.name || "Guest "} !{" "}
+              </span>
+              {user?.name ? (
+                <span
+                  className="pointer login-links fw-bold fs-5 ms-2 cursor-pointer"
+                  onClick={() => {
+                    localStorage.removeItem("user");
+                    window.location.href = "/";
+                  }}
+                >
+                  Log out
+                </span>
+              ) : null}
             </div>
           </div>
         </nav>

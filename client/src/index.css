@@ -9,3 +9,6 @@ input{
 .text-deco-none{
   text-decoration: none
 }
+.cursor-pointer{
+  cursor: pointer
+}
