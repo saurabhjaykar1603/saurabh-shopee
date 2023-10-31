@@ -4,6 +4,7 @@ import showToast from "crunchy-toast";
 import axios from "axios";
 import "./Signup.css"
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -60,9 +61,12 @@ function Signup() {
 
   return (
     <>
+    <div className="sticky-top">
+      <Navbar/>
+    </div>
       <section className="form my-4 mx-5">
         <div className="container ">
-          <div className="row no-gutters border shadow p-1">
+          <div className="row no-gutters border shadow p-1 bg-light rounded">
             <div className="col-lg-6">
               <img
                 src={SignupImg}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import showToast from "crunchy-toast";
 import axios from "axios";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -32,9 +33,12 @@ function Login() {
 
   return (
     <>
+     <div className="sticky-top">
+      <Navbar/>
+    </div>
       <section className="form my-4 mx-5">
         <div className="container ">
-          <div className="row no-gutters border shadow p-1">
+          <div className="row no-gutters border shadow bg-light p-1 rounded">
             <div className="col-lg- px-5 pt-5">
               <h1 className="fw-bold py-3 signup-web-title">
                 Saurabh's Shopee

@@ -1,7 +1,11 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #F3F3CC;
 }
 input{
   border  : 1px solid #B39F6B  !important; 
+}
+.text-deco-none{
+  text-decoration: none
 }
