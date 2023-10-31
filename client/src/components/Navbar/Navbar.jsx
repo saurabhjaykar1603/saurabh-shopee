@@ -48,7 +48,7 @@ function Navbar() {
             </div>
 
             <div>
-              <h5 className="pointer login-links"> Hello {user.name || "Guest "}! </h5>
+              <h5 className="pointer login-links"> Hello {user?.name || "Guest "}! </h5>
             </div>
           </div>
         </nav>

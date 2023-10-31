@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignupImg from "./images/signup.png";
 import showToast from "crunchy-toast";
 import axios from "axios";
-import "./Signup.css"
+import "./Signup.css";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -13,6 +13,14 @@ function Signup() {
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const [gender, setGender] = useState("female");
+
+  useEffect(() => {
+    const getloggedInUser = JSON.parse(localStorage.getItem("user" || "{}"));
+    if (getloggedInUser) {
+      alert("You have already logged in");
+      window.location.href = "/";
+    }
+  }, []);
 
   // api rq
   async function signupUser() {
@@ -61,9 +69,9 @@ function Signup() {
 
   return (
     <>
-    <div className="sticky-top">
-      <Navbar/>
-    </div>
+      <div className="sticky-top">
+        <Navbar />
+      </div>
       <section className="form my-4 mx-5">
         <div className="container ">
           <div className="row no-gutters border shadow p-1 bg-light rounded">
@@ -72,11 +80,13 @@ function Signup() {
                 src={SignupImg}
                 alt="dog"
                 className="img-fluid d-block mx-auto  "
-                style={{width: '440px'}}
+                style={{ width: "440px" }}
               />
             </div>
             <div className="col-lg-6 px-5 pt-5">
-              <h1 className="fw-bold py-3 signup-web-title">Saurabh's Shopee</h1>
+              <h1 className="fw-bold py-3 signup-web-title">
+                Saurabh's Shopee
+              </h1>
               <h4 className="signup-text">Sign into Your Account</h4>
 
               <form>
@@ -173,7 +183,10 @@ function Signup() {
                     >
                       Signup
                     </button>
-                    <span className="ms-2 fw-bold"> <Link to='/login'>Already have an acount </Link> </span>
+                    <span className="ms-2 fw-bold">
+                      {" "}
+                      <Link to="/login">Already have an acount </Link>{" "}
+                    </span>
                   </div>
                 </div>
               </form>

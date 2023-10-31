@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import showToast from "crunchy-toast";
 import axios from "axios";
@@ -7,6 +7,14 @@ import Navbar from "../../components/Navbar/Navbar";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const getloggedInUser = JSON.parse(localStorage.getItem("user" || "{}"));
+    if (getloggedInUser) {
+      alert("You have already logged in");
+      window.location.href = "/"
+    }
+  }, []);
 
   const loginUser = async () => {
     if (!email) {
@@ -22,7 +30,7 @@ function Login() {
       password,
     });
     console.log(response?.data);
-    if (response?.data.success) {
+    if (response?.data?.success) {
       showToast(response.data.message, "success", 4000);
       localStorage.setItem("user", JSON.stringify(response?.data?.data));
       window.location.href = "/";
@@ -33,9 +41,9 @@ function Login() {
 
   return (
     <>
-     <div className="sticky-top">
-      <Navbar/>
-    </div>
+      <div className="sticky-top">
+        <Navbar />
+      </div>
       <section className="form my-4 mx-5">
         <div className="container ">
           <div className="row no-gutters border shadow bg-light p-1 rounded">
