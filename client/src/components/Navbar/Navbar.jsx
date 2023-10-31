@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import  './Navbar.css'
+import "./Navbar.css";
 
 function Navbar() {
   return (
@@ -9,18 +9,36 @@ function Navbar() {
         <nav className="navbar navbar-expand-lg navbar-light bg-warning py-3 shadow">
           <div className="container d-flex justify-content-between align-items-center">
             <div>
-              <h4 className="fs-4 fw"> Saurabh's Shopee</h4>
+              <Link to='/' className="text-deco-none ">
+                {" "}
+                <h4 className="fs-4 fw-bold text-dark"> Saurabh's Shopee</h4>
+              </Link>
             </div>
 
             <div>
-              <Link className="me-4 fs-5 fw-medium text-dark text-deco-none login-links" to="/">
+              <Link
+                className="me-4 fs-5 fw-medium text-dark text-deco-none login-links"
+                to="/"
+              >
                 Home
               </Link>
-              <Link className="me-4 fs-5 fw-medium text-dark text-deco-none login-links" to="/signup">
+              <Link
+                className="me-4 fs-5 fw-medium text-dark text-deco-none login-links"
+                to="/signup"
+              >
                 Sign up
               </Link>
-              <Link className="fs-5 fw-medium text-dark text-deco-none login-links" to="/my-orders">
-               My Orders
+              <Link
+                className="me-4 fs-5 fw-medium text-dark text-deco-none login-links"
+                to="/login"
+              >
+                Login
+              </Link>
+              <Link
+                className="fs-5 fw-medium text-dark text-deco-none login-links"
+                to="/my-order"
+              >
+                My Orders
               </Link>
             </div>
 
