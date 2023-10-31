@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 
 function MyOrder() {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    const storageUse = JSON.parse(localStorage.getItem("user" || "{}"));
+    if (storageUse?.email && storageUse?.name) {
+      setUser(storageUse);
+    } else {
+      alert("Please login first");
+      window.location.href = "/login";
+    }
+  }, []);
+
   return (
     <>
       <div className="sticky-top">
