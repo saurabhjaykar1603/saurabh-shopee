@@ -3,6 +3,7 @@ import SignupImg from "./images/signup.png";
 import showToast from "crunchy-toast";
 import axios from "axios";
 import "./Signup.css"
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -168,6 +169,7 @@ function Signup() {
                     >
                       Signup
                     </button>
+                    <span className="ms-2 fw-bold"> <Link to='/login'>Already have an acount </Link> </span>
                   </div>
                 </div>
               </form>
