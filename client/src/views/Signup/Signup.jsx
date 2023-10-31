@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SignupImg from "./images/signup.png";
 import showToast from "crunchy-toast";
 import axios from "axios";
+import "./Signup.css"
 
 function Signup() {
   const [name, setName] = useState("");
@@ -58,72 +59,72 @@ function Signup() {
 
   return (
     <>
-      <section class="form my-4 mx-5">
-        <div class="container ">
-          <div class="row no-gutters border shadow">
-            <div class="col-lg-6">
+      <section className="form my-4 mx-5">
+        <div className="container ">
+          <div className="row no-gutters border shadow p-1">
+            <div className="col-lg-6">
               <img
                 src={SignupImg}
                 alt="dog"
-                class="img-fluid d-block mx-auto"
-                style={{ width: "540px" }}
+                className="img-fluid d-block mx-auto  "
+                style={{width: '440px'}}
               />
             </div>
-            <div class="col-lg-6 px-5 pt-5">
-              <h1 class="fw-bold py-3">Saurabh's Shoppe</h1>
-              <h4>Sign into Your Account</h4>
+            <div className="col-lg-6 px-5 pt-5">
+              <h1 className="fw-bold py-3 signup-web-title">Saurabh's Shopee</h1>
+              <h4 className="signup-text">Sign into Your Account</h4>
 
               <form>
-                <div class="form-row">
-                  <div class="col-lg-">
+                <div className="form-row">
+                  <div className="col-lg-">
                     <input
                       type="text"
                       placeholder="Enter Your Name"
-                      class="form-control my-3 p-2"
+                      className="form-control my-3 p-2"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="col-lg-">
+                <div className="form-row">
+                  <div className="col-lg-">
                     <input
                       type="email"
                       placeholder="Enter Your Email"
-                      class="form-control my-3 p-2"
+                      className="form-control my-3 p-2"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="col-lg-">
+                <div className="form-row">
+                  <div className="col-lg-">
                     <input
                       type="password"
                       placeholder="Enter Your password"
-                      class="form-control my-3 p-2"
+                      className="form-control my-3 p-2"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="col-lg-">
+                <div className="form-row">
+                  <div className="col-lg-">
                     <input
                       type="phone"
                       placeholder="Enter Your Phone Number"
-                      class="form-control my-3 p-2"
+                      className="form-control my-3 p-2"
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value)}
                     />
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="col-lg-">
+                <div className="form-row">
+                  <div className="col-lg-">
                     <input
                       type="text"
                       placeholder="Enter Your Adress"
-                      class="form-control my-3 p-2"
+                      className="form-control my-3 p-2"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />
@@ -158,11 +159,11 @@ function Signup() {
                     <label htmlFor="female">Female</label>
                   </div>
                 </div>
-                <div class="form-row ">
-                  <div class="col-lg-">
+                <div className="form-row ">
+                  <div className="col-lg-">
                     <button
                       type="button"
-                      class="btn btn-primary mb-3 px-4  "
+                      className="btn btn-warning mb-3 px-5 fs-5 fw-bold  "
                       onClick={signupUser}
                     >
                       Signup
