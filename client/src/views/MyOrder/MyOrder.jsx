@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 
 function MyOrder() {
- uh
   return (
     <>
       <div className="sticky-top">
