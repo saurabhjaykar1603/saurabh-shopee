@@ -13,14 +13,16 @@ function MyOrder() {
     }
   }, []);
 
+ 
   return (
     <>
       <div className="sticky-top">
         <Navbar />
       </div>
       <div>
-        <h1>My Order</h1>
+        <h1 className="text-center my-3 fw-bold">My Order</h1>
       </div>
+      
     </>
   );
 }
