@@ -27,7 +27,7 @@ function Home() {
       </div>
       <section className="d-flex justify-content-evenly">
         {products?.map((product, i) => {
-          const { name, description, image, price } = product;
+          const { _id, name, description, image, price } = product;
           return (
             <ProductCard
               key={i}
@@ -35,6 +35,7 @@ function Home() {
               description={description}
               image={image}
               price={price}
+              id={_id}
             />
           );
         })}

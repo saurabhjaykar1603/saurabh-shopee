@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./index.css";
 import MyOrder from "./views/MyOrder/MyOrder";
+import BuyPage from "./views/BuyPage/BuyPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/my-order",
     element: <MyOrder />,
-  }
+  },
+  {
+    path: "/buy-now/:id",
+    element: <BuyPage />,
+  },
 ]);
 root.render(<RouterProvider router={router} />);
