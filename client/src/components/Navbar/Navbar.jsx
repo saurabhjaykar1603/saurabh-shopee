@@ -11,8 +11,8 @@ function Navbar() {
   return (
     <>
       <div className="sticky-top">
-        <nav className="navbar navbar-expand-lg navbar-light bg-warning py-3 shadow">
-          <div className="container d-flex justify-content-between align-items-center">
+        <nav className=" navbar-expand-lg navbar-light bg-warning py-3 shadow ">
+          <div className="container navbar d-flex justify-content-between  ">
             <div>
               <Link to="/" className="text-deco-none ">
                 {" "}
@@ -20,7 +20,7 @@ function Navbar() {
               </Link>
             </div>
 
-            <div>
+            <div className="navbar-links-container">
               <Link
                 className="me-4 fs-5 fw-bold text-dark text-deco-none login-links"
                 to="/"

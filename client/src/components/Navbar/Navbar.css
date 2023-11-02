@@ -1,7 +1,6 @@
 .login-links {
   transition: all 0.3s ease-out;
   padding: 6px 10px;
-
 }
 .login-links:hover {
   background-color: black;
@@ -9,4 +8,29 @@
   color: white !important;
   border-radius: 3px;
 }
-
+.navbar {
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column !important;
+    align-items: start !important;
+  }
+  .navbar-links-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .login-link {
+    margin: 10px 0;
+  }
+  .login-link:hover {
+    background-color: #fff;
+    color: #000;
+    padding: 0;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  .navbar-user-container {
+    margin-top: 10px;
+  }
+}
