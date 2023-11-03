@@ -5,6 +5,7 @@ import axios from "axios";
 import plusImage from "./images/add.png";
 import minusImage from "./images/minus.png";
 import showToast from "crunchy-toast";
+import "./BuyPage.css";
 
 function BuyPage() {
   const { id } = useParams();
@@ -52,21 +53,23 @@ function BuyPage() {
       <div className="sticky-top">
         <Navbar />
       </div>
-      <div>
-        <p className="text-center mt-3 fw-bold fs-3 w-50 mx-auto">Buy now</p>
-      </div>
-      <div className="container bg-light border-2 shadow">
-        <div className="row">
+
+      <div className="container bg-light border-2 shadow rounded-3 mt-5">
+        <div className="row p-2">
           <div className="col-lg-4">
-            <div className="py-5">
-              <img src={product.image} alt="" className="img-fluid" />
+            <div className="buy-image-container">
+              <img
+                src={product.image}
+                alt=""
+                className="img-flui buy-product-card-img "
+              />
             </div>
           </div>
           <div className="col-lg-8" style={{ borderLeft: "2px solid tomato" }}>
             <div className="p-4 p-md-2 px-4">
               <h1>{product.name}</h1>
-              <h3 className="text-danger mt-4">₹ {product.price}/-</h3>
-              <p className="fs-5 fw-bold mt-4">{product.description}</p>
+              <h4 className="text-danger mt-3 ">₹ {product.price}/-</h4>
+              <p className="fs-6 fw-bold mt-3 ">{product.description}</p>
               <div
                 className="d-flex justify-content-evenly align-items-center mt-4"
                 style={{ width: "230px" }}
@@ -99,7 +102,10 @@ function BuyPage() {
                   <img src={plusImage} alt="" style={{ width: "30px" }} />
                 </button>
               </div>
-              <div className=" d-flex mt-2">
+              <div
+                className=" d-flex flex-column mt-3 card card-body"
+                style={{ width: "26rem" }}
+              >
                 <div>
                   <input
                     type="radio"
@@ -113,10 +119,10 @@ function BuyPage() {
                   />
                   <label htmlFor="40">
                     {" "}
-                    expected delivery in 3 days in 40 rs
+                    Expected delivery in 3 days in 40 rs
                   </label>
                 </div>
-                <div>
+                <div className="mt-2">
                   <input
                     type="radio"
                     id="100"
@@ -128,25 +134,25 @@ function BuyPage() {
                     }}
                   />
                   <label htmlFor="100">
-                    expected delivery in 1 day in 100 rs{" "}
+                    Expected delivery in 1 day in 100 rs{" "}
                   </label>
                 </div>
               </div>
-              <div className="w-50 mt-4">
+              <div className="w-50 mt-3">
                 <input
                   type="text"
                   className="form-control"
                   placeholder="Enter Shipping Address Here"
                   value={shippingAddress}
                   onChange={(e) => {
-                  setShippingAddress(e.target.value);
+                    setShippingAddress(e.target.value);
                   }}
                 />
               </div>
               <div className="order-btn text-center w-50 mt-3">
                 <button
                   type="button"
-                  className="btn btn-primary px-5"
+                  className="btn btn-warning w-100 fw-bold"
                   onClick={placeOrder}
                 >
                   Place Order
