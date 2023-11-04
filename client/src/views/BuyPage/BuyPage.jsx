@@ -14,6 +14,7 @@ function BuyPage() {
   const [shippingAddress, setShippingAddress] = useState("");
   const [deliveryCharges, setDeliveryCharges] = useState(40);
 
+
   const loadProduct = async () => {
     if (!id) {
       return;

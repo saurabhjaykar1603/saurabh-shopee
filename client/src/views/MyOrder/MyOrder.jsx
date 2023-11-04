@@ -7,6 +7,13 @@ function MyOrder() {
   const [user, setUser] = useState({});
   const [orders, setOrders] = useState([]);
 
+  const STATUS_BAGE_COLOR_MAP = {
+    "pending": "bage-danger",
+    "shipped": "bage-warning",
+    "deleivered": "bage-success"
+  };
+
+
   const loadOrders = async () => {
     const userId = user._id;
     if (!userId) {
@@ -52,12 +59,12 @@ function MyOrder() {
                     <div className="col-md-4">
                       {" "}
                       <div className="card-body user">
-                        <Link to={`buy-now/${product._id}` }className="fs-3 fw-medium text-deco-none">{product.name}</Link>
+                        <Link to={`/buy-now/${product._id}` }className="fs-3 fw-medium text-deco-none">{product.name}</Link>
                         <p className=" fw-bold fs-6 mt-3">
                           {product.price} x {quantity} = ₹{" "}
                           {product.price * quantity}/-
                         </p>
-                        <span className="order-status text-dark rounded-2 text-center fw-bold fs-5">
+                        <span className={`order-status text-dark rounded-2 text-center fw-bold fs-5 ${STATUS_BAGE_COLOR_MAP[status] }`}>
                           {status}
                         </span>
                         <p className="fw-bold">
