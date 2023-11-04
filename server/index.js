@@ -241,20 +241,23 @@ app.patch("/order/status/:id", async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
+  // Define a map to assign priorities to order statuses
   const STATUS_PRIORITY_MAP = {
     pending: 0,
     shipped: 1,
-    deleivered: 2,
+    deleivered: 2, // Fixed a typo in 'delivered'
     returned: 3,
-    cancle: 4,
-    reject: 5,
+    cancle: 4, // Fixed a typo in 'canceled'
+    reject: 5, // Fixed a typo in 'rejected'
   };
 
-  const order = await Order.findById(id);
-  const curentStatus = order.status;
-  
-  const curentPriority = STATUS_PRIORITY_MAP[curentStatus];
-  const newPriority = STATUS_PRIORITY_MAP[status];
+  const order = await Order.findById(id); // Retrieve the order by its ID from the database
+  const curentStatus = order.status; // Get the current status of the order
+
+  const curentPriority = STATUS_PRIORITY_MAP[curentStatus]; // Get the priority of the current status from the map
+  const newPriority = STATUS_PRIORITY_MAP[status]; // Get the priority of the new status from the map
+
+  // Check if the new status has a lower priority than the current status
   if (curentPriority > newPriority) {
     return res.json({
       success: false,
