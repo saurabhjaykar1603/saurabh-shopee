@@ -13,7 +13,8 @@
   background-color: red !important;
 }
 .bage-warning {
-  background-color: yellow  !important;
+  background-color: yellow !important;
+  color: black !important;
 }
 .bage-success {
   background-color: green !important;
