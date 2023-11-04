@@ -5,10 +5,34 @@ import axios from "axios";
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const searchProducts = async () => {
+    if (search == "") {
+      getAllProducts();
+      return;
+    }
+    try {
+      const response = await axios.get(`/products/search?q=${search}`);
+      console.log(response);
+      setProducts(response?.data?.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    searchProducts();
+  }, [search]);
+
   const getAllProducts = async () => {
-    const response = await axios.get("/products");
-    console.log(response?.data?.data);
-    setProducts(response?.data?.data);
+    try {
+      const response = await axios.get("/products");
+      console.log(response?.data?.data);
+      setProducts(response?.data?.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -21,9 +45,22 @@ function Home() {
         <Navbar />
       </div>
       <div>
-        <p className="text-center my-3 fw-bold fs-3  w-50 mx-auto">
+        <p className="text-center mt-3 fw-bold fs-3  w-50 mx-auto">
           Welcome to Saurabh's Shoppe
         </p>
+      </div>
+      <div className="d-flex  justify-content-center mb-3">
+        <div>
+          <input
+            type="text"
+            value={search}
+            className="form-control px-5"
+            placeholder="search products"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
       </div>
       <section className="d-flex justify-content-evenly">
         {products?.map((product, i) => {
