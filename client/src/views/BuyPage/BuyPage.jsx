@@ -42,7 +42,7 @@ function BuyPage() {
 
     if (responce?.data?.success) {
       alert(responce?.data?.message);
-      window.location.href = "/order";
+      window.location.href = "/my-order";
     } else {
       alert(responce?.data?.message);
     }

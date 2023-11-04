@@ -174,7 +174,7 @@ app.get("/products/search", async (req, res) => {
 });
 // //POST - /order
 app.post("/order", async (req, res) => {
-  const { user, product, quantity, price, deliveryCharges, shippingAddress } =
+  const { user, product, quantity, price, deliveryCharges, shippingAddress , status } =
     req.body;
 
   const order = new Order({
@@ -184,6 +184,7 @@ app.post("/order", async (req, res) => {
     price,
     deliveryCharges,
     shippingAddress,
+    status
   });
 
   try {
