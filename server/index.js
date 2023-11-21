@@ -165,7 +165,7 @@ app.put("/product/:id", async (req, res) => {
 
 app.get("/products/search", async (req, res) => {
   const { q } = req.query;
-  const product = await Product.findOne({ name: { $regex: q, $options: "i" } });
+  const product = await Product.find({ name: { $regex: q, $options: "i" } });
   res.json({
     success: true,
     data: product,
