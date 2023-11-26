@@ -4,11 +4,12 @@ import dotenv from "dotenv";
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import Order from "./models/Order.js";
-
+import path from 'path';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 9000;
 
@@ -19,7 +20,7 @@ const connectDB = async () => {
   }
 };
 // post/signup
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   const { name, email, password, mobile, address, gender } = req.body;
   const user = new User({
     name,
@@ -45,7 +46,7 @@ app.post("/signup", async (req, res) => {
 });
 
 // /Post/login
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -75,7 +76,7 @@ app.post("/login", async (req, res) => {
 });
 
 //get//get/product
-app.get("/products", async (req, res) => {
+app.get("/api/products", async (req, res) => {
   const getProducts = await Product.find();
   res.json({
     success: true,
@@ -85,7 +86,7 @@ app.get("/products", async (req, res) => {
 });
 
 //post//post/product
-app.post("/product", async (req, res) => {
+app.post("/api/product", async (req, res) => {
   const { name, price, description, image, brand, category } = req.body;
 
   const product = new Product({
@@ -114,7 +115,7 @@ app.post("/product", async (req, res) => {
 });
 
 //get/get/product/id
-app.get("/product/:id", async (req, res) => {
+app.get("/api/product/:id", async (req, res) => {
   const { id } = req.params;
   const finProduct = await Product.findById({ _id: id });
   res.json({
@@ -125,7 +126,7 @@ app.get("/product/:id", async (req, res) => {
 });
 
 //delete/product/:id
-app.delete("/product/:id", async (req, res) => {
+app.delete("/api/product/:id", async (req, res) => {
   const { id } = req.params;
   await Product.deleteOne({ _id: id });
   res.json({
@@ -135,7 +136,7 @@ app.delete("/product/:id", async (req, res) => {
 });
 
 //put//product/:id
-app.put("/product/:id", async (req, res) => {
+app.put("/api/product/:id", async (req, res) => {
   const { id } = req.params;
   const { name, price, description, image, brand, category } = req.body;
   await Product.updateOne(
@@ -163,7 +164,7 @@ app.put("/product/:id", async (req, res) => {
 
 //GET/products/search?q=....
 
-app.get("/products/search", async (req, res) => {
+app.get("/api/products/search", async (req, res) => {
   const { q } = req.query;
   const product = await Product.find({ name: { $regex: q, $options: "i" } });
   res.json({
@@ -173,7 +174,7 @@ app.get("/products/search", async (req, res) => {
   });
 });
 // //POST - /order
-app.post("/order", async (req, res) => {
+app.post("/api/order", async (req, res) => {
   const {
     user,
     product,
@@ -210,7 +211,7 @@ app.post("/order", async (req, res) => {
 });
 
 //GET /orders/:id
-app.get("/orders/:id", async (req, res) => {
+app.get("/api/orders/:id", async (req, res) => {
   const { id } = req.params;
   const findOrder = await Order.findById(id).populate("user product");
   findOrder.user.password = undefined;
@@ -222,7 +223,7 @@ app.get("/orders/:id", async (req, res) => {
 });
 
 // GET /order/user:id
-app.get("/orders/user/:id", async (req, res) => {
+app.get("/api/orders/user/:id", async (req, res) => {
   const { id } = req.params;
   const findUser = await Order.find({ user: id }).populate("user product");
 
@@ -237,7 +238,7 @@ app.get("/orders/user/:id", async (req, res) => {
 });
 
 // patch /order/status/:id
-app.patch("/order/status/:id", async (req, res) => {
+app.patch("/api/order/status/:id", async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
@@ -272,7 +273,7 @@ app.patch("/order/status/:id", async (req, res) => {
 });
 
 //GET /orders
-app.get("/orders", async (req, res) => {
+app.get("/api/orders", async (req, res) => {
   const findOrders = await Order.find().populate("user product");
 
   findOrders.forEach((order) => {
@@ -284,6 +285,11 @@ app.get("/orders", async (req, res) => {
     message: "Order successfully found by user product",
   });
 });
+
+// production 
+if (process.env.NODE_ENV === 'production') { app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html')) }); }
 
 app.listen(PORT, () => {
   console.log(`Server Running on PORT : ${PORT}`);
