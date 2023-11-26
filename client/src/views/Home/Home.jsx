@@ -27,7 +27,7 @@ function Home() {
 
   const getAllProducts = async () => {
     try {
-      const response = await axios.get("/products");
+      const response = await axios.get("/api/products");
       console.log(response?.data?.data);
       setProducts(response?.data?.data);
     } catch (e) {
